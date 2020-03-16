@@ -22,7 +22,10 @@ import {
   class FunFriday extends React.Component  {
   constructor(props){
     super(props);
+    
     this.state = {
+      getData : 'Create',
+      userMaster: [],
       fun_fridays : [],
       id : 0,
       funActivityName : '',
@@ -31,6 +34,12 @@ import {
     }
   }
   componentDidMount(){
+    axios.get('http://localhost/userMaster')
+      .then((res)=>{
+        this.setState({
+          userMaster : res.data
+        })
+      })
     axios.get('http://localhost/funFriday')
     .then((res)=>{
       this.setState({
@@ -89,6 +98,7 @@ import {
     axios.get(`http://localhost/funFriday/${id}`)
     .then((res)=>{
       this.setState({
+        getData : 'Update',
         id : res.data._id,
         funActivityName : res.data.funActivityName,
         funActivityDate : res.data.funActivityDate,
@@ -132,7 +142,7 @@ import {
         </Col>
         <Col xl={4} lg={12} md={12}>
         <Card>
-          <CardHeader>Create Fun Friday Activity</CardHeader>
+        <CardHeader>{this.state.getData} Fun Friday Activity</CardHeader>
           <CardBody>
             <Form onSubmit = {(e) => this.submit(e,this.state.id)}>
               <FormGroup>
@@ -159,11 +169,16 @@ import {
                 <Label>Winner Name</Label>
                 <Input
                   onChange = {(e)=>this.funWinnerChange(e)}
-                  type="text"
+                  type="select"
                   name="eventPoints"
                   value = {this.state.funWinner}
                   placeholder=""
-                />
+                >
+                <option key=''>Select</option>
+                {this.state.userMaster.map((user_master) => (
+                <option>{user_master.userName}</option>
+                ))}
+                </Input>
               </FormGroup>
               <FormGroup check row>
                 <Col sm={{ size: 10, offset: 2 }}>

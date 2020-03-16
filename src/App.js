@@ -14,7 +14,7 @@ const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 const TeamPage = React.lazy(() => import('pages/TeamPage'));
 const LearningSaturday = React.lazy(() => import('pages/LearningSaturday'));
 const FunFriday = React.lazy(() => import('pages/FunFriday'));
-
+const User = React.lazy(() => import('pages/Users'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -51,6 +51,7 @@ class App extends React.Component {
                 <Route exact path="/team" component={TeamPage} />
                 <Route exact path="/funFriday" component={FunFriday} />
                 <Route exact path="/learningSaturday" component={LearningSaturday} />
+                <Route exact path="/user" component={User} />
                 
               </React.Suspense>
             </MainLayout>
