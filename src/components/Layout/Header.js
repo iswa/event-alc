@@ -22,6 +22,11 @@ import bn from 'utils/bemnames';
 const bem = bn.create('header');
 
 class Header extends React.Component {
+  logOut(e){
+    e.preventDefault()
+    localStorage.removeItem('usertoken')
+    this.props.history.push(`/login`)
+  }
   state = {
     isOpenNotificationPopover: false,
     isNotificationConfirmed: false,
@@ -87,7 +92,7 @@ class Header extends React.Component {
                     <ListGroupItem tag="button" action className="border-light">
                       <MdSettingsApplications /> Settings
                     </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
+                    <ListGroupItem tag="button" action className="border-light" onClick = {this.logOut.bind(this)}>
                       <MdExitToApp /> Signout
                     </ListGroupItem>
                   </ListGroup>

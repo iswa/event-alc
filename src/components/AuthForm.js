@@ -9,29 +9,9 @@ class AuthForm extends React.Component {
     return this.props.authState === STATE_LOGIN;
   }
 
-  get isSignup() {
-    return this.props.authState === STATE_SIGNUP;
-  }
-
-  changeAuthState = authState => event => {
-    event.preventDefault();
-
-    this.props.onChangeAuthState(authState);
-  };
-
   handleSubmit = event => {
     event.preventDefault();
   };
-
-  renderButtonText() {
-    const { buttonText } = this.props;
-
-    if (!buttonText && this.isLogin) {
-      return 'Login';
-    }
-
-    return buttonText;
-  }
 
   render() {
     const responseGoogle = (response) => {
@@ -43,7 +23,6 @@ class AuthForm extends React.Component {
       usernameInputProps,
       passwordLabel,
       passwordInputProps,
-      children,
       onLogoClick,
     } = this.props;
 
@@ -63,7 +42,7 @@ class AuthForm extends React.Component {
         <div className="text-center pt-1">
           <h6>
           <GoogleLogin
-            clientId="152680586482-1lsgv5h3cn7hmcgp517a2209crls144o.apps.googleusercontent.com"
+            clientId="152680586482-tcai8n2a00m3njh791brtdsjvneqe158.apps.googleusercontent.com"
             buttonText="Sign in with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
@@ -86,19 +65,17 @@ class AuthForm extends React.Component {
           className="bg-gradient-theme-left border-0"
           block
           onClick={this.handleSubmit}>
-          {this.renderButtonText()}
+          Login
         </Button>
-        {children}
       </Form>
     );
   }
 }
 
 export const STATE_LOGIN = 'LOGIN';
-export const STATE_SIGNUP = 'SIGNUP';
 
 AuthForm.propTypes = {
-  authState: PropTypes.oneOf([STATE_LOGIN, STATE_SIGNUP]).isRequired,
+  authState: PropTypes.oneOf([STATE_LOGIN]).isRequired,
   showLogo: PropTypes.bool,
   usernameLabel: PropTypes.string,
   usernameInputProps: PropTypes.object,
@@ -121,11 +98,6 @@ AuthForm.defaultProps = {
   passwordInputProps: {
     type: 'password',
     placeholder: 'Your Password',
-  },
-  confirmPasswordLabel: 'Confirm Password',
-  confirmPasswordInputProps: {
-    type: 'password',
-    placeholder: 'confirm your password',
   },
   onLogoClick: () => {},
 };
