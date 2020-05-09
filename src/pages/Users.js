@@ -20,8 +20,14 @@ import {
   } from 'react-icons/md';
 
 class Users extends React.Component  {
+    checkAuth (){
+      if(!sessionStorage.jwtToken){
+        window.location.href = "http://localhost:3000/login";
+      }
+    }
     constructor(props){
       super(props);
+      this.checkAuth()
       this.state = {
         getData : 'Create',
         userMaster : [],
@@ -29,7 +35,8 @@ class Users extends React.Component  {
         userName : '',
         email : '',
         contactNo : '',
-        password : ''
+        password : '',
+        type : ''
       }
     }
     componentDidMount(){
@@ -41,6 +48,7 @@ class Users extends React.Component  {
           userName : '',
           email : '',
           contactNo : '',
+          type : '',
           password : ''
         })
       })
@@ -65,14 +73,20 @@ class Users extends React.Component  {
         password : event.target.value
       })
     }
+    typeChnage= event => {
+      this.setState({
+        type : event.target.value
+      })
+    }
     submit(event,id){
       event.preventDefault()
       if( id === 0 ){
         axios.post('http://localhost/userMaster',{
             userName : this.state.userName,
-          email : this.state.email,
-          contactNo : this.state.contactNo,
-          password : this.state.password
+            email : this.state.email,
+            contactNo : this.state.contactNo,
+            password : this.state.password,
+            type : this.state.type
         })
         .then(()=> {
           this.componentDidMount()
@@ -82,7 +96,8 @@ class Users extends React.Component  {
             userName : this.state.userName,
             email : this.state.email,
             contactNo : this.state.contactNo,
-            password : this.state.password
+            password : this.state.password,
+            type : this.state.type
         })
         .then(()=> {
           this.componentDidMount()
@@ -104,7 +119,8 @@ class Users extends React.Component  {
           userName : res.data.userName,
           email : res.data.email,
           contactNo : res.data.contactNo,
-          password : res.data.password
+          password : res.data.password,
+          type : res.data.type
         })
       })
     }
@@ -122,6 +138,7 @@ class Users extends React.Component  {
                           <th>Name</th>
                           <th>Email</th>
                           <th>Contact No</th>
+                          <th>Type</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -131,6 +148,7 @@ class Users extends React.Component  {
                           <td>{userMaster.userName}</td>
                           <td>{userMaster.email.toLowerCase()}</td>
                           <td>{userMaster.contactNo}</td>
+                          <td>{userMaster.type}</td>
                           <td>
                             <MdCreate title= 'Edit' onClick = {(e)=>this.edit(userMaster._id)} />&nbsp;&nbsp;
                             <MdDelete title= 'Delete' onClick = {(e)=>this.delete(userMaster._id)} />
@@ -176,6 +194,19 @@ class Users extends React.Component  {
                         value = {this.state.contactNo}
                         placeholder="Enter Contact No."
                       />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label>Account Type</Label>
+                      <Input
+                        onChange = {(e)=>this.typeChnage(e)}
+                        type="select"
+                        value = {this.state.type}
+                        name="select">
+                        <option>Select</option>
+                        <option>Normal</option>
+                        <option>Admin</option>
+                        <option>Super Admin</option>
+                      </Input>
                     </FormGroup>
                     <FormGroup>
                       <Label>Password</Label>

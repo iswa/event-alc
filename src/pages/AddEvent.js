@@ -20,8 +20,14 @@ import {
   } from 'react-icons/md';
 
   class AddEvent extends React.Component  {
+    checkAuth (){
+      if(!sessionStorage.jwtToken){
+        window.location.href = "http://localhost:3000/login";
+      }
+    }
   constructor(props){
     super(props);
+    this.checkAuth()
     this.state = {
       activity : [],
       id : 0,
@@ -35,7 +41,7 @@ import {
     axios.get('http://localhost/activity')
     .then((res)=>{
       this.setState({
-        activity : res.data,
+        user : res.data,
         id : 0,
         activityName : '',
         activityDate : '',

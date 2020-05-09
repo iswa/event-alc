@@ -1,33 +1,66 @@
 import logo6 from 'assets/img/logo/logo_200.png';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { GoogleLogin } from 'react-google-login';
+import React, {Component} from 'react';
+import axios from 'axios';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import jwt_decode from "jwt-decode";
 
-class AuthForm extends React.Component {
-  get isLogin() {
-    return this.props.authState === STATE_LOGIN;
+class AuthForm extends Component {
+  isLogin() {
+    window.location.href = "http://localhost:3000/";
   }
-
-  handleSubmit = event => {
-    event.preventDefault();
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      errors: ''
+    };
+  }
+  checkLogin = e => {
+    e.preventDefault();
+    axios.post(`http://localhost/api/user/login`,{
+      email : this.state.email,
+      password : this.state.password
+    }).then((res) => { 
+      const token  = res.data.token;
+      sessionStorage.setItem("jwtToken", token);
+      console.log(sessionStorage.jwtToken)
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      sessionStorage.setItem("userName", decoded.userName );
+      sessionStorage.setItem("userEmail", decoded.email );
+      sessionStorage.setItem("userType", decoded.type );
+      if(res.data.success === true){
+        this.isLogin()
+      }
+    })
+    .catch(error => {
+      this.setState({
+        errors : error.response.data.message
+      })
+      
+    });
   };
 
+  emailChange = event => {
+    this.setState({
+      email : event.target.value,
+      errors : ''
+    })
+  }
+  passwordChange = event => {
+    this.setState({
+      password : event.target.value,
+      errors : ''
+    })
+  }
   render() {
-    const responseGoogle = (response) => {
-      console.log(response);
-    }
     const {
       showLogo,
-      usernameLabel,
-      usernameInputProps,
-      passwordLabel,
-      passwordInputProps,
-      onLogoClick,
     } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.checkLogin}>
         {showLogo && (
           <div className="text-center pb-4">
             <img
@@ -35,36 +68,33 @@ class AuthForm extends React.Component {
               className="rounded"
               style={{ width: 100, height: 100, cursor: 'pointer', backgroundColor: '#F2F4F4'  }}
               alt="logo"
-              onClick={onLogoClick}
+              // onClick={onLogoClick}
             />
           </div>
         )}
-        <div className="text-center pt-1">
-          <h6>
-          <GoogleLogin
-            clientId="152680586482-tcai8n2a00m3njh791brtdsjvneqe158.apps.googleusercontent.com"
-            buttonText="Sign in with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
-          </h6>
-          <h6>or</h6>
-        </div>
+        <Label style ={{ textAlignLast : 'center' , color : 'red' }}>{this.state.errors}</Label>
         <FormGroup>
-          <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} />
+          <Label for='Email'>Email</Label>
+          <Input  
+            value={this.state.email} 
+            type = 'email'
+            onChange={(e)=>this.emailChange(e)}
+            placeholder ='Your Email' />
         </FormGroup>
         <FormGroup>
-          <Label for={passwordLabel}>{passwordLabel}</Label>
-          <Input {...passwordInputProps} />
+          <Label for='Password'>Password</Label>
+          <Input 
+            value={this.state.password}
+            type = 'password'
+            onChange={(e)=>this.passwordChange(e)}
+            placeholder ='Your Password'  />
         </FormGroup>
         <hr />
         <Button
           size="lg"
           className="bg-gradient-theme-left border-0"
           block
-          onClick={this.handleSubmit}>
+          type = 'submit'>
           Login
         </Button>
       </Form>
@@ -74,32 +104,19 @@ class AuthForm extends React.Component {
 
 export const STATE_LOGIN = 'LOGIN';
 
-AuthForm.propTypes = {
-  authState: PropTypes.oneOf([STATE_LOGIN]).isRequired,
-  showLogo: PropTypes.bool,
-  usernameLabel: PropTypes.string,
-  usernameInputProps: PropTypes.object,
-  passwordLabel: PropTypes.string,
-  passwordInputProps: PropTypes.object,
-  confirmPasswordLabel: PropTypes.string,
-  confirmPasswordInputProps: PropTypes.object,
-  onLogoClick: PropTypes.func,
+export const setAuthToken = token => {
+  if (token) {
+    // Apply authorization token to every request if logged in
+    axios.defaults.headers.common["Authorization"] = token;
+  } else {
+    // Delete auth header
+    delete axios.defaults.headers.common["Authorization"];
+  }
 };
 
 AuthForm.defaultProps = {
   authState: 'LOGIN',
-  showLogo: true,
-  usernameLabel: 'Email',
-  usernameInputProps: {
-    type: 'email',
-    placeholder: 'Your Email',
-  },
-  passwordLabel: 'Password',
-  passwordInputProps: {
-    type: 'password',
-    placeholder: 'Your Password',
-  },
-  onLogoClick: () => {},
+  showLogo : true
 };
 
 export default AuthForm;

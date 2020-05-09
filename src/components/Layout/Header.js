@@ -4,7 +4,7 @@ import React from 'react';
 import {
   MdClearAll,
   MdExitToApp,
-  MdSettingsApplications,
+  // MdSettingsApplications,
 } from 'react-icons/md';
 import {
   Button,
@@ -24,8 +24,11 @@ const bem = bn.create('header');
 class Header extends React.Component {
   logOut(e){
     e.preventDefault()
-    localStorage.removeItem('usertoken')
-    this.props.history.push(`/login`)
+    sessionStorage.removeItem('jwtToken')
+    sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('userEmail')
+    sessionStorage.removeItem('userType')
+    window.location.href = "http://localhost:3000/login";
   }
   state = {
     isOpenNotificationPopover: false,
@@ -83,15 +86,15 @@ class Header extends React.Component {
             >
               <PopoverBody className="p-0 border-light">
                 <UserCard
-                  title="Development User"
-                  subtitle="iswatirupatirao@gmail.com"
-                  text="Online"
+                  title = {sessionStorage.userName}
+                  subtitle= {sessionStorage.userEmail}
+                  text={sessionStorage.userType}
                   className="border-light"
                 >
                   <ListGroup flush>
-                    <ListGroupItem tag="button" action className="border-light">
+                    {/* <ListGroupItem tag="button" action className="border-light">
                       <MdSettingsApplications /> Settings
-                    </ListGroupItem>
+                    </ListGroupItem> */}
                     <ListGroupItem tag="button" action className="border-light" onClick = {this.logOut.bind(this)}>
                       <MdExitToApp /> Signout
                     </ListGroupItem>

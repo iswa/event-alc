@@ -16,6 +16,15 @@ import {
 } from 'reactstrap';
 
 class DashboardPage extends React.Component {
+  checkAuth (){
+    if(!sessionStorage.jwtToken){
+      window.location.href = "http://localhost:3000/login";
+    }
+  }
+  constructor(props){
+    super(props);
+    this.checkAuth()
+  }
   componentDidMount() {
     // this is needed, because InfiniteCalendar forces window scroll
     window.scrollTo(0, 0);

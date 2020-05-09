@@ -34,7 +34,6 @@ class App extends React.Component {
                 <AuthPage {...props} authState={STATE_LOGIN} />
               )}
             />
-
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
@@ -44,7 +43,6 @@ class App extends React.Component {
                 <Route exact path="/funFriday" component={FunFriday} />
                 <Route exact path="/learningSaturday" component={LearningSaturday} />
                 <Route exact path="/user" component={User} />
-                
               </React.Suspense>
             </MainLayout>
             <Redirect to="/" />

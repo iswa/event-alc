@@ -1,19 +1,23 @@
 import { Content, Header, Sidebar } from 'components/Layout';
 import React from 'react';
-import {
-  MdImportantDevices,
-  MdLoyalty,
-} from 'react-icons/md';
+// import {
+//   MdImportantDevices,
+//   MdLoyalty,
+// } from 'react-icons/md';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from 'utils/constants';
 
 class MainLayout extends React.Component {
+  static checkAuth (){
+    if(!sessionStorage.jwtToken){
+      window.location.href = "http://localhost:3000/login";
+    }
+  }
   static isSidebarOpen() {
     return document
       .querySelector('.cr-sidebar')
       .classList.contains('cr-sidebar--open');
   }
-
   componentWillReceiveProps({ breakpoint }) {
     if (breakpoint !== this.props.breakpoint) {
       this.checkBreakpoint(breakpoint);
@@ -23,30 +27,30 @@ class MainLayout extends React.Component {
   componentDidMount() {
     this.checkBreakpoint(this.props.breakpoint);
 
-    setTimeout(() => {
-      if (!this.notificationSystem) {
-        return;
-      }
+  //   setTimeout(() => {
+  //     if (!this.notificationSystem) {
+  //       return;
+  //     }
 
-      this.notificationSystem.addNotification({
-        title: <MdImportantDevices />,
-        message: 'Welcome Iswa Tirupati Rao',
-        level: 'info',
-      });
-    }, 1500);
+  //     this.notificationSystem.addNotification({
+  //       title: <MdImportantDevices />,
+  //       message: 'Welcome '+sessionStorage.userName,
+  //       level: 'info',
+  //     });
+  //   }, 1500);
 
-    setTimeout(() => {
-      if (!this.notificationSystem) {
-        return;
-      }
+  //   setTimeout(() => {
+  //     if (!this.notificationSystem) {
+  //       return;
+  //     }
 
-      this.notificationSystem.addNotification({
-        title: <MdLoyalty />,
-        message:
-          'Company : Great Place IT Services',
-        level: 'info',
-      });
-    }, 2500);
+  //     this.notificationSystem.addNotification({
+  //       title: <MdLoyalty />,
+  //       message:
+  //         'Company : Great Place IT Services',
+  //       level: 'info',
+  //     });
+  //   }, 2500);
   }
 
   // close sidebar when

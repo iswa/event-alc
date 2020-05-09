@@ -23,8 +23,14 @@ import {
   const roles = ['Developer', 'Business Analyst', 'Quality Analyst', 'Captain'];
 
 class TeamPage extends React.Component  {
+  checkAuth (){
+    if(!sessionStorage.jwtToken){
+      window.location.href = "http://localhost:3000/login";
+    }
+  }
     constructor(props){
       super(props);
+      this.checkAuth()
       this.state = {
         getData : 'Create',
         userMaster: [],

@@ -20,8 +20,14 @@ import {
   } from 'react-icons/md';
 
 class LearningSaturday extends React.Component  {
+  checkAuth (){
+    if(!sessionStorage.jwtToken){
+      window.location.href = "http://localhost:3000/login";
+    }
+  }
     constructor(props){
       super(props);
+      this.checkAuth()
       this.state = {
         getData : 'Create',
         learning_saturday : [],
