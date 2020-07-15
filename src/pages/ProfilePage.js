@@ -19,7 +19,7 @@ import {
 class ProfilePage extends React.Component {
   checkAuth (){
     if(!sessionStorage.jwtToken){
-      window.location.href = "http://localhost:3000/login";
+      window.location.href = "https://alc-backend.herokuapp.com/login";
     }
   }
   constructor(props){

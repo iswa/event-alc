@@ -22,7 +22,7 @@ import {
 class Users extends React.Component  {
     checkAuth (){
       if(!sessionStorage.jwtToken){
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "https://event-alc.herokuapp.com/login";
       }
     }
     constructor(props){
@@ -40,7 +40,7 @@ class Users extends React.Component  {
       }
     }
     componentDidMount(){
-      axios.get('http://localhost/userMaster')
+      axios.get('https://alc-backend.herokuapp.com/userMaster')
       .then((res)=>{
         this.setState({
           userMaster : res.data,
@@ -81,7 +81,7 @@ class Users extends React.Component  {
     submit(event,id){
       event.preventDefault()
       if( id === 0 ){
-        axios.post('http://localhost/userMaster',{
+        axios.post('https://alc-backend.herokuapp.com/userMaster',{
             userName : this.state.userName,
             email : this.state.email,
             contactNo : this.state.contactNo,
@@ -92,7 +92,7 @@ class Users extends React.Component  {
           this.componentDidMount()
         })
       }else{
-        axios.put(`http://localhost/userMaster/${id}`,{
+        axios.put(`https://alc-backend.herokuapp.com/userMaster/${id}`,{
             userName : this.state.userName,
             email : this.state.email,
             contactNo : this.state.contactNo,
@@ -105,13 +105,13 @@ class Users extends React.Component  {
       }
     }
     delete(id){
-      axios.delete(`http://localhost/userMaster/${id}`)
+      axios.delete(`https://alc-backend.herokuapp.com/userMaster/${id}`)
       .then(()=>{
         this.componentDidMount()
       })
     }
     edit(id){
-      axios.get(`http://localhost/userMaster/${id}`)
+      axios.get(`https://alc-backend.herokuapp.com/userMaster/${id}`)
       .then((res)=>{
         this.setState({
           getData : 'Update',

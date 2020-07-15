@@ -22,7 +22,7 @@ import {
 class LearningSaturday extends React.Component  {
   checkAuth (){
     if(!sessionStorage.jwtToken){
-      window.location.href = "http://localhost:3000/login";
+      window.location.href = "https://event-alc.herokuapp.com/login";
     }
   }
     constructor(props){
@@ -38,7 +38,7 @@ class LearningSaturday extends React.Component  {
       }
     }
     componentDidMount(){
-      axios.get('http://localhost/learningSaturday')
+      axios.get('https://alc-backend.herokuapp.com/learningSaturday')
       .then((res)=>{
         this.setState({
           learning_saturday : res.data,
@@ -67,7 +67,7 @@ class LearningSaturday extends React.Component  {
     submit(event,id){
       event.preventDefault()
       if( id === 0 ){
-        axios.post('http://localhost/learningSaturday',{
+        axios.post('https://alc-backend.herokuapp.com/learningSaturday',{
           learningDate : this.state.learningDate,
           learningDay : this.state.learningDay,
           learningActivityName : this.state.learningActivityName
@@ -76,7 +76,7 @@ class LearningSaturday extends React.Component  {
           this.componentDidMount()
         })
       }else{
-        axios.put(`http://localhost/learningSaturday/${id}`,{
+        axios.put(`https://alc-backend.herokuapp.com/learningSaturday/${id}`,{
           learningDate : this.state.learningDate,
           learningDay : this.state.learningDay,
           learningActivityName : this.state.learningActivityName
@@ -87,13 +87,13 @@ class LearningSaturday extends React.Component  {
       }
     }
     delete(id){
-      axios.delete(`http://localhost/learningSaturday/${id}`)
+      axios.delete(`https://alc-backend.herokuapp.com/learningSaturday/${id}`)
       .then(()=>{
         this.componentDidMount()
       })
     }
     edit(id){
-      axios.get(`http://localhost/learningSaturday/${id}`)
+      axios.get(`https://alc-backend.herokuapp.com/learningSaturday/${id}`)
       .then((res)=>{
         this.setState({
           getData : 'Update',

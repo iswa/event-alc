@@ -18,7 +18,7 @@ import {
 class DashboardPage extends React.Component {
   checkAuth (){
     if(!sessionStorage.jwtToken){
-      window.location.href = "http://localhost:3000/login";
+      window.location.href = "https://event-alc.herokuapp.com/login";
     }
   }
   constructor(props){

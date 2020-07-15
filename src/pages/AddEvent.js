@@ -22,7 +22,7 @@ import {
   class AddEvent extends React.Component  {
     checkAuth (){
       if(!sessionStorage.jwtToken){
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "https://event-alc.herokuapp.com/login";
       }
     }
   constructor(props){
@@ -38,7 +38,7 @@ import {
     }
   }
   componentDidMount(){
-    axios.get('http://localhost/activity')
+    axios.get('https://alc-backend.herokuapp.com/activity')
     .then((res)=>{
       this.setState({
         user : res.data,
@@ -73,7 +73,7 @@ import {
   submit(event,id){
     event.preventDefault()
     if( id === 0 ){
-      axios.post('http://localhost/activity',{
+      axios.post('https://alc-backend.herokuapp.com/activity',{
         activityName : this.state.activityName,
         activityDate : this.state.activityDate,
         activityPoints : this.state.activityPoints,
@@ -83,7 +83,7 @@ import {
         this.componentDidMount()
       })
     }else{
-      axios.put(`http://localhost/activity/${id}`,{
+      axios.put(`https://alc-backend.herokuapp.com/activity/${id}`,{
         activityName : this.state.activityName,
         activityDate : this.state.activityDate,
         activityPoints : this.state.activityPoints,
@@ -95,13 +95,13 @@ import {
     }
   }
   delete(id){
-    axios.delete(`http://localhost/activity/${id}`)
+    axios.delete(`https://alc-backend.herokuapp.com/activity/${id}`)
     .then(()=>{
       this.componentDidMount()
     })
   }
   edit(id){
-    axios.get(`http://localhost/activity/${id}`)
+    axios.get(`https://alc-backend.herokuapp.com/activity/${id}`)
     .then((res)=>{
       this.setState({
         id : res.data._id,

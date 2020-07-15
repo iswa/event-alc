@@ -22,7 +22,7 @@ import {
   class FunFriday extends React.Component  {
     checkAuth (){
       if(!sessionStorage.jwtToken){
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "https://event-alc.herokuapp.com/login";
       }
     }
   constructor(props){
@@ -39,13 +39,13 @@ import {
     }
   }
   componentDidMount(){
-    axios.get('http://localhost/userMaster')
+    axios.get('https://alc-backend.herokuapp.com/userMaster')
       .then((res)=>{
         this.setState({
           userMaster : res.data
         })
       })
-    axios.get('http://localhost/funFriday')
+    axios.get('https://alc-backend.herokuapp.com/funFriday')
     .then((res)=>{
       this.setState({
         fun_fridays : res.data,
@@ -74,7 +74,7 @@ import {
   submit(event,id){
     event.preventDefault()
     if( id === 0 ){
-      axios.post('http://localhost/funFriday',{
+      axios.post('https://alc-backend.herokuapp.com/funFriday',{
         funActivityName : this.state.funActivityName,
         funActivityDate : this.state.funActivityDate,
         funWinner : this.state.funWinner,
@@ -83,7 +83,7 @@ import {
         this.componentDidMount()
       })
     }else{
-      axios.put(`http://localhost/funFriday/${id}`,{
+      axios.put(`https://alc-backend.herokuapp.com/funFriday/${id}`,{
         funActivityName : this.state.funActivityName,
         funActivityDate : this.state.funActivityDate,
         funWinner : this.state.funWinner
@@ -94,13 +94,13 @@ import {
     }
   }
   delete(id){
-    axios.delete(`http://localhost/funFriday/${id}`)
+    axios.delete(`https://alc-backend.herokuapp.com/funFriday/${id}`)
     .then(()=>{
       this.componentDidMount()
     })
   }
   edit(id){
-    axios.get(`http://localhost/funFriday/${id}`)
+    axios.get(`https://alc-backend.herokuapp.com/funFriday/${id}`)
     .then((res)=>{
       this.setState({
         getData : 'Update',
