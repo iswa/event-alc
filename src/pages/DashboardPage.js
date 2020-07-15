@@ -110,6 +110,13 @@ class DashboardPage extends React.Component {
           <IconWidget
             bgColor="white"
             inverse={false}
+            icon={MdRateReview}
+            title="Pride"
+            subtitle="New Reviews"
+          />
+          <IconWidget
+            bgColor="white"
+            inverse={false}
             icon={MdShare}
             title="Cambridary"
             subtitle="New Shares"

@@ -10,11 +10,12 @@ import './styles/reduction.scss';
 
 const EventShow = React.lazy(() => import('pages/AddEvent'));
 const ProfilePage = React.lazy(() => import('pages/ProfilePage'));
-const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
+// const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 const TeamPage = React.lazy(() => import('pages/TeamPage'));
 const LearningSaturday = React.lazy(() => import('pages/LearningSaturday'));
 const FunFriday = React.lazy(() => import('pages/FunFriday'));
 const User = React.lazy(() => import('pages/Users'));
+const ChangePassword = React.lazy(() => import('pages/changePassword'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -36,13 +37,14 @@ class App extends React.Component {
             />
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/" component={DashboardPage} />
+                <Route exact path="/" component={ProfilePage} />
                 <Route exact path="/event" component={EventShow} />
-                <Route exact path="/profile" component={ProfilePage} />
+                {/* <Route exact path="/profile" component={ProfilePage} /> */}
                 <Route exact path="/team" component={TeamPage} />
                 <Route exact path="/funFriday" component={FunFriday} />
                 <Route exact path="/learningSaturday" component={LearningSaturday} />
                 <Route exact path="/user" component={User} />
+                <Route exact path="/changePassword" component={ChangePassword} />
               </React.Suspense>
             </MainLayout>
             <Redirect to="/" />

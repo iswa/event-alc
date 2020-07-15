@@ -4,7 +4,7 @@ import React from 'react';
 import {
   MdClearAll,
   MdExitToApp,
-  // MdSettingsApplications,
+  MdSettingsApplications,
 } from 'react-icons/md';
 import {
   Button,
@@ -29,6 +29,10 @@ class Header extends React.Component {
     sessionStorage.removeItem('userEmail')
     sessionStorage.removeItem('userType')
     window.location.href = "http://localhost:3000/login";
+  }
+  changePassowrd(e){
+    e.preventDefault()
+    window.location.href = "http://localhost:3000/changePassword";
   }
   state = {
     isOpenNotificationPopover: false,
@@ -92,9 +96,9 @@ class Header extends React.Component {
                   className="border-light"
                 >
                   <ListGroup flush>
-                    {/* <ListGroupItem tag="button" action className="border-light">
-                      <MdSettingsApplications /> Settings
-                    </ListGroupItem> */}
+                    <ListGroupItem tag="button" action className="border-light" onClick = {this.changePassowrd.bind(this)}>
+                      <MdSettingsApplications /> Change Password
+                    </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light" onClick = {this.logOut.bind(this)}>
                       <MdExitToApp /> Signout
                     </ListGroupItem>

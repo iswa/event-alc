@@ -34,7 +34,7 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-const navComponents = [
+const alcComponents = [
   { to: '/event', name: 'Events', exact: false, Icon: MdRadioButtonChecked },
   { to: '/team', name: 'Team', exact: false, Icon: MdChromeReaderMode },
   { to: '/volunteer', name: 'volunteering', exact: false, Icon: MdViewList },
@@ -42,13 +42,14 @@ const navComponents = [
   { to: '/invoice', name: 'Invoice ', exact: false, Icon: MdViewList },
 ];
 
-const navContents = [
+const kraComponents = [
   { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
   { to: '/tables', name: 'tables', exact: false, Icon: MdBorderAll },
 ];
 
-const pageContents = [
+const devContents = [
   { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
+  { to: '/user', name: 'Users', exact: false, Icon: MdAccountCircle },
 ];
 
 const navItems = [
@@ -133,7 +134,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenComponents}>
-              {navComponents.map(({ to, name, exact, Icon }, index) => (
+              {alcComponents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
@@ -173,7 +174,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenContents}>
-              {navContents.map(({ to, name, exact, Icon }, index) => (
+              {kraComponents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
@@ -213,7 +214,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenPages}>
-              {pageContents.map(({ to, name, exact, Icon }, index) => (
+              {devContents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
