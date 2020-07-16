@@ -20,11 +20,11 @@ import {
   } from 'react-icons/md';
 
 class LearningSaturday extends React.Component  {
-  checkAuth (){
-    if(!sessionStorage.jwtToken){
-      window.location.href = "https://event-alc.herokuapp.com/login";
-    }
-  }
+  // checkAuth (){
+  //   if(!sessionStorage.jwtToken){
+  //     window.location.href = "https://event-alc.herokuapp.com/login";
+  //   }
+  // }
     constructor(props){
       super(props);
       this.checkAuth()

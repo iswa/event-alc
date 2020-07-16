@@ -23,11 +23,11 @@ import {
   const roles = ['Developer', 'Business Analyst', 'Quality Analyst', 'Captain'];
 
 class TeamPage extends React.Component  {
-  checkAuth (){
-    if(!sessionStorage.jwtToken){
-      window.location.href = "https://event-alc.herokuapp.com/login";
-    }
-  }
+  // checkAuth (){
+  //   if(!sessionStorage.jwtToken){
+  //     window.location.href = "https://event-alc.herokuapp.com/login";
+  //   }
+  // }
     constructor(props){
       super(props);
       this.checkAuth()

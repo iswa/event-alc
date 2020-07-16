@@ -17,11 +17,11 @@ import {
 } from 'reactstrap';
 
 class ProfilePage extends React.Component {
-  checkAuth (){
-    if(!sessionStorage.jwtToken){
-      window.location.href = "https://alc-backend.herokuapp.com/login";
-    }
-  }
+  // checkAuth (){
+  //   if(!sessionStorage.jwtToken){
+  //     window.location.href = "https://alc-backend.herokuapp.com/login";
+  //   }
+  // }
   constructor(props){
     super(props);
     this.checkAuth()
