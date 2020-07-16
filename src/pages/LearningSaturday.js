@@ -38,7 +38,7 @@ class LearningSaturday extends React.Component  {
       }
     }
     componentDidMount(){
-      axios.get('https://alc-backend.herokuapp.com/learningSaturday')
+      axios.get('http://localhost/learningSaturday')
       .then((res)=>{
         this.setState({
           learning_saturday : res.data,
@@ -67,7 +67,7 @@ class LearningSaturday extends React.Component  {
     submit(event,id){
       event.preventDefault()
       if( id === 0 ){
-        axios.post('https://alc-backend.herokuapp.com/learningSaturday',{
+        axios.post('http://localhost/learningSaturday',{
           learningDate : this.state.learningDate,
           learningDay : this.state.learningDay,
           learningActivityName : this.state.learningActivityName
@@ -76,7 +76,7 @@ class LearningSaturday extends React.Component  {
           this.componentDidMount()
         })
       }else{
-        axios.put(`https://alc-backend.herokuapp.com/learningSaturday/${id}`,{
+        axios.put(`http://localhost/learningSaturday/${id}`,{
           learningDate : this.state.learningDate,
           learningDay : this.state.learningDay,
           learningActivityName : this.state.learningActivityName
@@ -87,13 +87,13 @@ class LearningSaturday extends React.Component  {
       }
     }
     delete(id){
-      axios.delete(`https://alc-backend.herokuapp.com/learningSaturday/${id}`)
+      axios.delete(`http://localhost/learningSaturday/${id}`)
       .then(()=>{
         this.componentDidMount()
       })
     }
     edit(id){
-      axios.get(`https://alc-backend.herokuapp.com/learningSaturday/${id}`)
+      axios.get(`http://localhost/learningSaturday/${id}`)
       .then((res)=>{
         this.setState({
           getData : 'Update',

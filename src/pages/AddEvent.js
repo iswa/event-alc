@@ -38,7 +38,7 @@ import {
     }
   }
   componentDidMount(){
-    axios.get('https://alc-backend.herokuapp.com/activity')
+    axios.get('http://localhost/activity')
     .then((res)=>{
       this.setState({
         user : res.data,
@@ -73,7 +73,7 @@ import {
   submit(event,id){
     event.preventDefault()
     if( id === 0 ){
-      axios.post('https://alc-backend.herokuapp.com/activity',{
+      axios.post('http://localhost/activity',{
         activityName : this.state.activityName,
         activityDate : this.state.activityDate,
         activityPoints : this.state.activityPoints,
@@ -83,7 +83,7 @@ import {
         this.componentDidMount()
       })
     }else{
-      axios.put(`https://alc-backend.herokuapp.com/activity/${id}`,{
+      axios.put(`http://localhost/activity/${id}`,{
         activityName : this.state.activityName,
         activityDate : this.state.activityDate,
         activityPoints : this.state.activityPoints,
@@ -95,13 +95,13 @@ import {
     }
   }
   delete(id){
-    axios.delete(`https://alc-backend.herokuapp.com/activity/${id}`)
+    axios.delete(`http://localhost/activity/${id}`)
     .then(()=>{
       this.componentDidMount()
     })
   }
   edit(id){
-    axios.get(`https://alc-backend.herokuapp.com/activity/${id}`)
+    axios.get(`http://localhost/activity/${id}`)
     .then((res)=>{
       this.setState({
         id : res.data._id,

@@ -39,13 +39,13 @@ import {
     }
   }
   componentDidMount(){
-    axios.get('https://alc-backend.herokuapp.com/userMaster')
+    axios.get('http://localhost/userMaster')
       .then((res)=>{
         this.setState({
           userMaster : res.data
         })
       })
-    axios.get('https://alc-backend.herokuapp.com/funFriday')
+    axios.get('http://localhost/funFriday')
     .then((res)=>{
       this.setState({
         fun_fridays : res.data,
@@ -74,7 +74,7 @@ import {
   submit(event,id){
     event.preventDefault()
     if( id === 0 ){
-      axios.post('https://alc-backend.herokuapp.com/funFriday',{
+      axios.post('http://localhost/funFriday',{
         funActivityName : this.state.funActivityName,
         funActivityDate : this.state.funActivityDate,
         funWinner : this.state.funWinner,
@@ -83,7 +83,7 @@ import {
         this.componentDidMount()
       })
     }else{
-      axios.put(`https://alc-backend.herokuapp.com/funFriday/${id}`,{
+      axios.put(`http://localhost/funFriday/${id}`,{
         funActivityName : this.state.funActivityName,
         funActivityDate : this.state.funActivityDate,
         funWinner : this.state.funWinner
@@ -94,13 +94,13 @@ import {
     }
   }
   delete(id){
-    axios.delete(`https://alc-backend.herokuapp.com/funFriday/${id}`)
+    axios.delete(`http://localhost/funFriday/${id}`)
     .then(()=>{
       this.componentDidMount()
     })
   }
   edit(id){
-    axios.get(`https://alc-backend.herokuapp.com/funFriday/${id}`)
+    axios.get(`http://localhost/funFriday/${id}`)
     .then((res)=>{
       this.setState({
         getData : 'Update',

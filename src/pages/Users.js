@@ -40,7 +40,7 @@ class Users extends React.Component  {
       }
     }
     componentDidMount(){
-      axios.get('https://alc-backend.herokuapp.com/userMaster')
+      axios.get('http://localhost/userMaster')
       .then((res)=>{
         this.setState({
           userMaster : res.data,
@@ -81,7 +81,7 @@ class Users extends React.Component  {
     submit(event,id){
       event.preventDefault()
       if( id === 0 ){
-        axios.post('https://alc-backend.herokuapp.com/userMaster',{
+        axios.post('http://localhost/userMaster',{
             userName : this.state.userName,
             email : this.state.email,
             contactNo : this.state.contactNo,
@@ -92,7 +92,7 @@ class Users extends React.Component  {
           this.componentDidMount()
         })
       }else{
-        axios.put(`https://alc-backend.herokuapp.com/userMaster/${id}`,{
+        axios.put(`http://localhost/userMaster/${id}`,{
             userName : this.state.userName,
             email : this.state.email,
             contactNo : this.state.contactNo,
@@ -105,13 +105,13 @@ class Users extends React.Component  {
       }
     }
     delete(id){
-      axios.delete(`https://alc-backend.herokuapp.com/userMaster/${id}`)
+      axios.delete(`http://localhost/userMaster/${id}`)
       .then(()=>{
         this.componentDidMount()
       })
     }
     edit(id){
-      axios.get(`https://alc-backend.herokuapp.com/userMaster/${id}`)
+      axios.get(`http://localhost/userMaster/${id}`)
       .then((res)=>{
         this.setState({
           getData : 'Update',
