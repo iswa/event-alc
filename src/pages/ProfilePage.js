@@ -24,7 +24,7 @@ class ProfilePage extends React.Component {
   // }
   constructor(props){
     super(props);
-    this.checkAuth()
+    // this.checkAuth()
   }
   render() {
     return (

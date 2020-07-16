@@ -27,7 +27,7 @@ class LearningSaturday extends React.Component  {
   // }
     constructor(props){
       super(props);
-      this.checkAuth()
+      // this.checkAuth()
       this.state = {
         getData : 'Create',
         learning_saturday : [],

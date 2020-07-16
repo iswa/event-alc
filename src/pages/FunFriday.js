@@ -27,7 +27,7 @@ import {
     // }
   constructor(props){
     super(props);
-    this.checkAuth()
+    // this.checkAuth()
     this.state = {
       getData : 'Create',
       userMaster: [],

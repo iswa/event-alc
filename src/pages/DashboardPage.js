@@ -23,7 +23,7 @@ class DashboardPage extends React.Component {
   // }
   constructor(props){
     super(props);
-    this.checkAuth()
+    // this.checkAuth()
   }
   componentDidMount() {
     // this is needed, because InfiniteCalendar forces window scroll
