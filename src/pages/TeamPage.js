@@ -42,13 +42,13 @@ class TeamPage extends React.Component  {
       }
     }
     componentDidMount(){
-      axios.get('http://localhost/userMaster')
+      axios.get('https://alc-backend.herokuapp.com/userMaster')
       .then((res)=>{
         this.setState({
           userMaster : res.data
         })
       })
-      axios.get('http://localhost/team')
+      axios.get('https://alc-backend.herokuapp.com/team')
       .then((res)=>{
         this.setState({
           team : res.data,
@@ -78,7 +78,7 @@ class TeamPage extends React.Component  {
     }
     submit(event,id){
       event.preventDefault()
-        axios.post('http://localhost/team',{
+        axios.post('https://alc-backend.herokuapp.com/team',{
           memberName : this.state.memberName,
           role : this.state.role,
           teamName : this.state.teamName
@@ -88,7 +88,7 @@ class TeamPage extends React.Component  {
         })
     }
     delete(id){
-      axios.delete(`http://localhost/team/${id}`)
+      axios.delete(`https://alc-backend.herokuapp.com/team/${id}`)
       .then(()=>{
         this.componentDidMount()
       })
